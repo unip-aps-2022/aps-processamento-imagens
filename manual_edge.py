@@ -1,46 +1,41 @@
 import matplotlib.pyplot as plt
 
-# define the vertical filter
-vertical_filter = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
+# filtro vertical e horizontal
+filtroVertical = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
+filtroHorizontal = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
 
-# define the horizontal filter
-horizontal_filter = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
+# lê a foto "t"
+imagem = plt.imread('C:/Users/flavi/Pictures/t4.jpg')
 
-# read in the pinwheel image
-img = plt.imread('C:/Users/flavi/Pictures/t.jpg')
+# armazena o x, y e z da foto e inicia foto final
+n, m, d = imagem.shape
+bordasImagem = imagem.copy()
 
-# get the dimensions of the image
-n, m, d = img.shape
+# itera por todos os pixels
+for linha in range(3, n - 2):
+    for coluna in range(3, m - 2):
+        # cria area da imagem de tamanho 3 por 3
+        areaPixels = imagem[linha - 1:linha + 2, coluna - 1:coluna + 2, 0]
 
-# initialize the edges image
-edges_img = img.copy()
+        # aplica o filtro vertical
+        verticalFiltroAplicado = filtroVertical * areaPixels
+        somaVertical = verticalFiltroAplicado.sum() / 4
 
-# loop over all pixels in the image
-for row in range(3, n - 2):
-    for col in range(3, m - 2):
-        # create little local 3x3 box
-        local_pixels = img[row - 1:row + 2, col - 1:col + 2, 0]
+        # aplica o filtro horizontal
+        horizontalFiltroAplicado = filtroHorizontal * areaPixels
+        somaHorizontal = horizontalFiltroAplicado.sum() / 4
 
-        # apply the vertical filter
-        vertical_transformed_pixels = vertical_filter * local_pixels
-        # remap the vertical score
-        vertical_score = vertical_transformed_pixels.sum() / 4
+        # faz a soma ponderada do filtro vertical e horizontal elevados a 2
+        calculoBordas = (somaVertical ** 2 + somaHorizontal ** 2) ** .5
 
-        # apply the horizontal filter
-        horizontal_transformed_pixels = horizontal_filter * local_pixels
-        # remap the horizontal score
-        horizontal_score = horizontal_transformed_pixels.sum() / 4
+        # insere a soma ponderada na imagem
+        bordasImagem[linha, coluna] = [calculoBordas] * 3
 
-        # combine the horizontal and vertical scores into a total edge score
-        edge_score = (vertical_score ** 2 + horizontal_score ** 2) ** .5
+# previne erro de sair das bordas
+bordasImagem = bordasImagem / bordasImagem.max()
 
-        # insert this edge score into the edges image
-        edges_img[row, col] = [edge_score] * 3
-
-# remap the values in the 0-1 range in case they went out of bounds
-edges_img = edges_img / edges_img.max()
-
-fig, axes = plt.subplots(ncols=2, figsize=(10, 5))
-axes[0].set_title("Num sei")
-axes[0].imshow(edges_img)
+# mostra
+fig, axes = plt.subplots(ncols=1, figsize=(10, 5))
+axes.set_title("Num sei")
+axes.imshow(bordasImagem)
 plt.show()
