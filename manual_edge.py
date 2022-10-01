@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 
 # filtro vertical e horizontal
-filtroVertical = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
-filtroHorizontal = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
-
+filtroVerticalSobel = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
+filtroHorizontalSobel = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
 # lê a foto "t"
 imagem = plt.imread('C:/Users/flavi/Pictures/t4.jpg')
 
@@ -17,13 +16,13 @@ for linha in range(3, n - 2):
         # cria area da imagem de tamanho 3 por 3
         areaPixels = imagem[linha - 1:linha + 2, coluna - 1:coluna + 2, 0]
 
-        # aplica o filtro vertical
-        verticalFiltroAplicado = filtroVertical * areaPixels
-        somaVertical = verticalFiltroAplicado.sum() / 4
+        # aplica o filtro de sobel na vertical
+        sobelVerticalFiltroAplicado = filtroVerticalSobel * areaPixels
+        somaVertical = sobelVerticalFiltroAplicado.sum() / 4
 
-        # aplica o filtro horizontal
-        horizontalFiltroAplicado = filtroHorizontal * areaPixels
-        somaHorizontal = horizontalFiltroAplicado.sum() / 4
+        # aplica o filtro de sobel na horizontal
+        sobelHorizontalFiltroAplicado = filtroHorizontalSobel * areaPixels
+        somaHorizontal = sobelHorizontalFiltroAplicado.sum() / 4
 
         # faz a soma ponderada do filtro vertical e horizontal elevados a 2
         calculoBordas = (somaVertical ** 2 + somaHorizontal ** 2) ** .5
