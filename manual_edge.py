@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 filtroVerticalSobel = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
 filtroHorizontalSobel = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
 # lê a foto "t"
-imagem = plt.imread('C:/Users/flavi/Pictures/t4.jpg')
+imagem = plt.imread('C:/Users/flavi/Pictures/tudofodido.jpg')
 
 # armazena o x, y e z da foto e inicia foto final
 n, m, d = imagem.shape
