@@ -1,14 +1,16 @@
 import manual_edge
-import matplotlib.pyplot as plt
 
 import manual_gauss
+import matplotlib.pyplot as plt
 
-imagemOriginal = plt.imread('C:/Users/flavi/Pictures/principal.jpg')
+# carrega a imagem em uma variável
+imagemOriginal = plt.imread('C:/Users/flavi/Pictures/principal.jpg')  # caminho para a imagem na máquina
+# aplica o filtro de sobel
 imagemFinal = manual_edge.sobel_manual(imagemOriginal)
+# aplica o filtro de gauss
 # imagemFinal = manual_gauss.gauss_manual(imagemOriginal)
 
-# tá funcionando mas tem que aumentar o kernel do gauss
-
+# compara antes e depois
 fig, axes = plt.subplots(ncols=2, figsize=(10, 5))
 axes[0].set_title("Antes")
 axes[0].imshow(plt.imread('C:/Users/flavi/Pictures/principal.jpg'))
