@@ -28,7 +28,7 @@ def sobel_manual(imageBeforeSobel):
             bordasImagem[linha, coluna] = [calculoBordas] * 3
 
     # previne erro de sair das bordas
-    bordasImagem = bordasImagem / bordasImagem.max()
+    # bordasImagem = bordasImagem / bordasImagem.max()
 
     # mostra
     # fig, axes = plt.subplots(ncols=1, figsize=(10, 5))
