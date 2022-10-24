@@ -1,8 +1,5 @@
 import manual_edge
-import manual_rgb2gray
-import manual_gauss
 import matplotlib.pyplot as plt
-from PIL import Image
 
 
 # carrega a imagem em uma variável

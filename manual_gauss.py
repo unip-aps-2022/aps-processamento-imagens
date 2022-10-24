@@ -1,13 +1,3 @@
-import cv2 as cv2
-import matplotlib.pyplot as plt
-import numpy as np
-
-# imageBeforeGauss = plt.imread('C:/Users/flavi/Pictures/T.jpg')
-#
-# n, m, d = imageBeforeGauss.shape
-# gaussImagem = imageBeforeGauss.copy()
-
-
 def gauss_manual(imageBeforeGauss):
     gaussImagem = imageBeforeGauss.copy()
     x, y, z = imageBeforeGauss.shape
